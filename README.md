@@ -2,7 +2,9 @@
 
 Code and data for the analysis in 
 	
-Oksana Buzhdygan & Jana S. Petermann	(2023)
+Oksana Buzhdygan & Jana S. Petermann	
+
+2023
 
 "Multitrophic aspects of ecological intensification and multiple ecosystem functions and services"
 
