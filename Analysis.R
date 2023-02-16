@@ -1497,7 +1497,7 @@ dat %>%
 
 ##FigS3a----
 
-dat_FigS1b <- dat %>% 
+dat_FigS3a <- dat %>% 
   distinct(EF_specific, EF_details, Paper.number, .keep_all = TRUE) %>%  mutate(Taxon_broad=recode(Taxon_broad, "vertibrates, invertebrates" = "incl. vertibrates")) %>%
   filter(EF_group_broad == "Multifunctionality")%>%
   mutate(EF_dimens_specific=recode_factor(EF_dimens_specific, "diversity, stocks, rates, fluxes, soil properties"="biodiversity"))%>%
@@ -1513,10 +1513,10 @@ dat_FigS1b <- dat %>%
   add_count(wt=sum(n), name="sum")%>%
   mutate(perc=round(n*100/sum, digits=2))
 
-dat_FigS1b
+dat_FigS3a
 
 
-ggplot(dat_FigS1b, aes(y=n, x=EF_dimens_specific)) + 
+ggplot(dat_FigS3a, aes(y=n, x=EF_dimens_specific)) + 
   geom_bar(position="stack", stat="identity", colour = "black", fill="grey")+
   coord_flip() +
   labs(y = "Investigated Multifunctionality", x =element_blank() ) +
@@ -1541,7 +1541,7 @@ ggplot(dat_FigS1b, aes(y=n, x=EF_dimens_specific)) +
 ##FigS3b----
 # Methods used for the multifunctionality assessments 
 
-dat_FigS1b <- dat %>% 
+dat_FigS3b <- dat %>% 
   distinct(EF_specific, EF_details, Paper.number, .keep_all = TRUE) %>%  mutate(Taxon_broad=recode(Taxon_broad, "vertibrates, invertebrates" = "incl. vertibrates")) %>%
   filter(EF_group_broad == "Multifunctionality")%>%
   filter(! (EF_details == "mean log-response ratio"))%>%
@@ -1557,9 +1557,9 @@ dat_FigS1b <- dat %>%
   add_count(wt=sum(n), name="sum")%>%
   mutate(perc=round(n*100/sum, digits=2))
 
-dat_FigS1b
+dat_FigS3b
 
-ggplot(dat_FigS1b, aes(y=n, x=EF_details)) + 
+ggplot(dat_FigS3b, aes(y=n, x=EF_details)) + 
   geom_bar(position="stack", stat="identity", colour = "black", fill="grey")+
   coord_flip() +
   labs(y = "Investigated Multifunctionality", x =element_blank() ) +
@@ -1638,3 +1638,4 @@ ggplot(dat_FigS3c, aes(fill=Relationship_management_function, y=n, x=Trtmnt)) +
 
 
 #End---------------
+
