@@ -35,12 +35,14 @@ df_centers <- as.data.frame(centroids) |>
 # This is used to summarize the number of studies by country
 
 # 2.1 read the excel file
-data <- read_csv("Data_Ecol_Intensf_Multitroph_BEF.csv")
+data <- read_csv("Data/Data_Ecol_Intensf_Multitroph_BEF.csv")
 
 # Filter papers that are relevant for our search criteria
 site_info <- data%>% 
   filter(Relevant=="Yes")
+
 str(site_info)
+
 names(site_info)
 
 site_info
@@ -113,7 +115,7 @@ study_no_known <- study_no_known |>
 # httr::stop_for_status(httr::GET(url, httr::write_disk("continents.json")))
 
 # 4.1 read the continent shapes
-continents <- rgdal::readOGR("continents.json")
+continents <- rgdal::readOGR("World map/continents.json")
 continents_map <- fortify(continents, region = "CONTINENT")
 
 # 4.2 remove Antarctica

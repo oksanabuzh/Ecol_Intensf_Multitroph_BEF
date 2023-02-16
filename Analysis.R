@@ -9,7 +9,7 @@ library(patchwork)
 
 # Data----
 
-data <- read.csv("Data_Ecol_Intensf_Multitroph_BEF.csv", header = TRUE)
+data <- read.csv("Data/Data_Ecol_Intensf_Multitroph_BEF.csv", header = TRUE)
 str(data)
 
 # Filter papers that are relevant for our search criteria
