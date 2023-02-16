@@ -1,8 +1,9 @@
-# Code for world map with country origin of the articles studied within the 
-# quantitative part of the paper 
+# Code for world map with country origin of the articles studied 
+# within the quantitative part of the paper 
 
 
-# Acknowledgment to Dr. Selina Baldauf for help with this code for map creation
+# Acknowledgment to Dr. Selina Baldauf for 
+# help with this code for map construction
 
 # Required packages:
 

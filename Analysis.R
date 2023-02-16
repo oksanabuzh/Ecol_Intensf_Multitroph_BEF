@@ -1,5 +1,5 @@
-# Code for the quantitative part of the paper  
-# includes summarizing and visualization of results
+# Code for the quantitative analysis: 
+# summarizing and visualization of results
 
 # Required packages
 
