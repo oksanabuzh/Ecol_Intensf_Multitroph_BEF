@@ -1,14 +1,7 @@
-# Multitrophic BEF and ecological intensification
-#
-# Oksana Buzhdygan & Jana S. Petermann
+# Code for the quantitative part of the paper  
+# includes summarizing and visualization of results
 
-# 2023
-
-# Journal of Plant Ecology
-## Special issue “Ecological intensification of agriculture and forestry through biodiversity management”
-
-
-# Libraries
+# Required packages
 
 library(tidyverse)
 library(ggplot2)
