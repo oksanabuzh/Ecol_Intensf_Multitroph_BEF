@@ -1053,7 +1053,6 @@ p1+p2+p3+p4+plot_layout(ncol=1)
 
 dat_Fig7.3 <- dat %>% 
   distinct(Focus_broad, EF_specific, Paper.number, .keep_all = TRUE) %>% # create a row for each unique paper and variable (e.g. treatment)
-  
   mutate(Trtmnt=fct_recode(Treatment_broad, "Habitat complexity"="Habitat complexity (as covariate)")) %>%
   count(Trtmnt, Relationship_management_function) %>% 
   drop_na()  %>%
@@ -1442,7 +1441,7 @@ dat_figS2 %>%
 
 write.csv(dat_figS2, "S8.csv")
 
-## FigS2----
+## FigS4----
 ggplot(dat_figS2%>%
          filter(!(BEF_context.depend_broad=="No"))%>%
          count(BEF_context.depend_broad), 
@@ -1489,7 +1488,7 @@ dat %>%
   mutate(perc=round(n*100/sum, digits=1))
 
 
-##FigS1a----
+##FigS3a----
 
 dat_FigS1b <- dat %>% 
   distinct(EF_specific, EF_details, Paper.number, .keep_all = TRUE) %>%  mutate(Taxon_broad=recode(Taxon_broad, "vertibrates, invertebrates" = "incl. vertibrates")) %>%
@@ -1532,7 +1531,7 @@ ggplot(dat_FigS1b, aes(y=n, x=EF_dimens_specific)) +
         axis.ticks.y = element_blank())
 
 
-##FigS1b----
+##FigS3b----
 # Methods used for the multifunctionality assessments 
 
 dat_FigS1b <- dat %>% 
@@ -1587,5 +1586,48 @@ data %>%
   count(EF_dimens_specific)%>%
   add_count(wt=sum(n), name="sum")%>%
   mutate(perc=round(n*100/sum, digits=2))
+
+
+
+##FigS3c----
+# Effects of treatment (broad types) on Multifunctionality
+# The proportion of positive, neutral, and negative effects of land use intensity, disturbance, 
+# habitat complexity and restoration as drivers of ecosystem functions (Fig.7 right panel). 
+
+dat_FigS3c <- dat %>% 
+  distinct(Focus_broad, EF_specific, Paper.number, .keep_all = TRUE) %>% # create a row for each unique paper and variable (e.g. treatment)
+  filter(EF_group_broad=="Multifunctionality") %>% 
+  mutate(Trtmnt=fct_recode(Treatment_broad, "Habitat complexity"="Habitat complexity (as covariate)")) %>%
+  count(Trtmnt, Relationship_management_function) %>% 
+  drop_na()  %>%
+  add_count(Trtmnt, wt = n, name = "n_Trtmnt")%>% 
+  filter(!(Trtmnt == "Biodiversity effects (observational)")) %>%
+  mutate(Trtmnt =fct_relevel(Trtmnt ,c(
+                                       "Restoration",
+                                       "Habitat complexity",
+                                       "Land use intensity")))
+dat_FigS3c
+
+dat_FigS3c %>% 
+  summarise(sum(n))
+
+
+colr <- c("firebrick1", "darkgray", "dodgerblue2")
+
+ggplot(dat_FigS3c, aes(fill=Relationship_management_function, y=n, x=Trtmnt)) + 
+  geom_bar(position="fill", stat="identity")+
+  scale_fill_manual(values=colr)+ 
+  coord_flip() +
+  labs(y = " ", x = element_blank()) +
+  theme(axis.text.y=element_text(colour = "black", size=15),
+        axis.text.x=element_text(colour = "black", size=12),
+        axis.title=element_text(size=12),
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.ticks =  element_line(colour = "grey85"),
+        axis.ticks.y = element_blank())  +
+  geom_text(aes(label=n_Trtmnt,y=n_Trtmnt),y=1.05, size=5)+ 
+  scale_y_continuous(expand = c(0, 0.1))
+
 
 #End---------------
