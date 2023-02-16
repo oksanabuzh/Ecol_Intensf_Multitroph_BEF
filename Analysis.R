@@ -29,20 +29,20 @@ names(dat)
                                       
 #Fig3----
 
-##Fig3a----
+##Fig3b----
 # Summarize number and % of the studies for each continent
 
-dat_Fig3a <- dat %>% 
+dat_Fig3b <- dat %>% 
   distinct(Paper.number, .keep_all = TRUE) %>% 
   count(Continent) %>% # 
   drop_na() %>% # one study is simulation modelling
   add_count(wt = sum(n), name = "sum") %>% 
   add_count(Continent, wt = round(n*100/sum, digits = 2), name = "perc") 
 
-dat_Fig3a
+dat_Fig3b
 
-# Figure 3a (barplot)
-ggplot(dat_Fig3a, aes(y=n, x=Continent)) + 
+# Figure 3b (barplot)
+ggplot(dat_Fig3b, aes(y=n, x=Continent)) + 
   geom_bar(position="stack", stat="identity", colour = "black", fill="grey")+
   coord_flip() +
   labs(y = "Number of studies", x =element_blank() ) +
@@ -81,10 +81,10 @@ dat %>%
   add_count(wt=sum(n), name = "sum")%>%
   add_count( Treatment_broad, wt = round(n*100/sum, digits=2), name = "perc") 
 
-##Fig3b----
+##Fig3c----
 # Number and % of publications per ecosystem type
 
-dat_Fig3b <- dat %>% 
+dat_Fig3c <- dat %>% 
   distinct(Paper.number, .keep_all = TRUE) %>% 
   mutate(Ecosystem_type_broad =fct_relevel(Ecosystem_type_broad ,
                                      c("forests, tree plantations",
@@ -97,38 +97,10 @@ dat_Fig3b <- dat %>%
   add_count( wt = sum(n), name = "sum") %>% 
   add_count( Ecosystem_type_broad, wt = round(n*100/sum, digits = 2), name = "perc")
 
-dat_Fig3b
-
-# Figure 3b
-ggplot(dat_Fig3b, aes(y=n, x=Ecosystem_type_broad)) + 
-  geom_bar(position="stack", stat="identity", colour = "black", fill="grey")+
-  coord_flip() +
-  labs(y = "Number of studies", x =element_blank() ) +
-  theme(axis.text.y=element_text(colour = "black", size=15),
-        axis.text.x=element_text(colour = "black", size=13),
-        axis.title=element_text(size=15),
-        legend.text=element_text(size=10),
-        legend.title=element_text(size=12) ,
-        legend.position = "none",
-        panel.background = element_blank(),
-        axis.line = element_line(colour = "black"),
-        axis.ticks =  element_line(colour = "black"),
-        axis.ticks.y = element_blank())
-
-
-##Fig3c----
-# Number and % of publications per ecosystem type
-
-dat_Fig3c <- dat %>% 
-  distinct(Paper.number, .keep_all = TRUE) %>% 
-  count(Experiment_type) %>% 
-  add_count( wt = sum(n), name = "sum") %>% 
-  add_count( Experiment_type, wt = round(n*100/sum, digits = 2), name = "perc") 
-
 dat_Fig3c
 
 # Figure 3c
-ggplot(dat_Fig3c, aes(y=n, x=Experiment_type)) + 
+ggplot(dat_Fig3c, aes(y=n, x=Ecosystem_type_broad)) + 
   geom_bar(position="stack", stat="identity", colour = "black", fill="grey")+
   coord_flip() +
   labs(y = "Number of studies", x =element_blank() ) +
@@ -142,6 +114,8 @@ ggplot(dat_Fig3c, aes(y=n, x=Experiment_type)) +
         axis.line = element_line(colour = "black"),
         axis.ticks =  element_line(colour = "black"),
         axis.ticks.y = element_blank())
+
+
 
 
 #Fig4----
@@ -189,10 +163,10 @@ dat %>%
   count(Div_index_specific) %>% 
   summarise(sum(n))
 
-##Fig4a----
+##FigS2a----
 # Investigated biodiversity across trophic levels
 
-dat_Fig4a <- dat %>% 
+FigS2a <- dat %>% 
   distinct(Taxon_spec, Div_level, Div_index_specific, Paper.number, .keep_all = TRUE) %>%
   mutate(Trophic.group_broad =fct_relevel(Trophic.group_broad ,c("plants", 
                                                                  "1st_cons", 
@@ -203,14 +177,14 @@ dat_Fig4a <- dat %>%
   add_count(wt = sum(n), name = "sum")%>% 
   mutate(perc=round(n*100/sum, digits=1))
 
-dat_Fig4a
+FigS2a
 
-dat_Fig4a%>% 
+FigS2a%>% 
   summarise(sum(n)) # n=152 biodiversity investigated 
 
 col <- c("seagreen3","magenta", "mediumvioletred", "orange",  "skyblue" )
 
-ggplot(dat_Fig4a, aes(y=n, x=Trophic.group_broad, fill=Trophic.group_broad)) + 
+ggplot(FigS2a, aes(y=n, x=Trophic.group_broad, fill=Trophic.group_broad)) + 
   geom_bar(position="stack", stat="identity", colour = col, fill=col)+
   coord_flip() +
   labs(y = "Investigated biodiversity", x =element_blank() ) +
@@ -227,11 +201,11 @@ ggplot(dat_Fig4a, aes(y=n, x=Trophic.group_broad, fill=Trophic.group_broad)) +
 
 
 
-##Fig4b----
+##FigS2b----
 # Number of biodiversity measures investigated per taxa groups studied
 # Broad categories of taxa groups studied
 
-dat_Fig4b <- dat %>% 
+dat_FigS2b <- dat %>% 
   distinct(Taxon_spec, Div_level, Div_index_specific, Paper.number, .keep_all = TRUE) %>% 
   mutate(Taxon_broad=fct_recode(Taxon_broad, "incl. vertebrates" = "vertebrates, invertebrates")) %>%
   mutate(Taxon_broad=fct_recode(Taxon_broad, "incl. vertebrates" = "vertebrates, invertebrates, microorganisms")) %>%
@@ -247,13 +221,13 @@ dat_Fig4b <- dat %>%
   count(Taxon_broad)%>%
   mutate(perc=n*100/152) # 152 is the number of biodiversity metrics tested (disregard of EFs), see above
 
-dat_Fig4b
+dat_FigS2b
 
-dat_Fig4b%>% 
+dat_FigS2b%>% 
   summarise(sum(n)) # n=152 biodiversity investigated 
 
 
-ggplot(dat_Fig4b, aes(y=n, x=Taxon_broad)) + 
+ggplot(dat_FigS2b, aes(y=n, x=Taxon_broad)) + 
   geom_bar(position="stack", stat="identity", colour = "black", fill="grey")+
   coord_flip() +
   labs(y = "Investigated biodiversity", x =element_blank() ) +
@@ -269,10 +243,10 @@ ggplot(dat_Fig4b, aes(y=n, x=Taxon_broad)) +
         axis.ticks.y = element_blank())
 
 
-##Fig4c----
+##Fig3d----
 
 # Biodiversity indices used across the study papers
-dat_Fig4c <- dat %>% 
+dat_Fig3d <- dat %>% 
   distinct(Taxon_spec, Div_level, Div_index_specific, Paper.number, .keep_all = TRUE) %>% 
   mutate(Div_level =fct_relevel(Div_level ,c("food web",
                                    "multidiversity",
@@ -284,12 +258,12 @@ dat_Fig4c <- dat %>%
   add_count(wt=sum(n), name = "sum")%>%
   mutate(perc= round(n*100/sum, digits = 2))
 
-dat_Fig4c
+dat_Fig3d
 
-dat_Fig4c%>% 
+dat_Fig3d%>% 
   summarise(sum(n)) # n=152 biodiversity investigated 
 
-ggplot(dat_Fig4c, aes(y=n, x=Div_level)) + 
+ggplot(dat_Fig3d, aes(y=n, x=Div_level)) + 
   geom_bar(position="stack", stat="identity", colour = "black", fill="grey")+
   coord_flip() +
   labs(y = "Investigated biodiversity", x =element_blank() ) +
@@ -344,11 +318,11 @@ dat %>%
   mutate(AG_BG =fct_relevel(AG_BG ,c("AG, BG", "BG","AG"))) 
 
 
-##Fig4d_1----
+##Fig3e_1----
 
 # services/disservices
 
-dat_Fig4d_1 <- dat %>% 
+dat_Fig3e_1 <- dat %>% 
   distinct(EF_specific, Paper.number, .keep_all = TRUE) %>% 
   mutate(Service.disservice =fct_relevel(Service.disservice, c("service",
                                                                "disservice"))) %>%
@@ -356,11 +330,11 @@ dat_Fig4d_1 <- dat %>%
   add_count(wt = sum(n), name = "sum")%>% 
   mutate(perc=round(n*100/sum, digits=1))
 
-dat_Fig4d_1
+dat_Fig3e_1
 
 col2 <- c("darkolivegreen3", "yellow")
 
-ggplot(dat_Fig4d_1, aes(y=n, x=Service.disservice, fill=Service.disservice)) + 
+ggplot(dat_Fig3e_1, aes(y=n, x=Service.disservice, fill=Service.disservice)) + 
   geom_bar(position="stack", stat="identity", colour = "black", fill=col2)+
   labs(y = "Investigated EFs", x =element_blank() ) +
   theme(axis.text.y=element_text(colour = "black", size=15),
@@ -375,11 +349,11 @@ ggplot(dat_Fig4d_1, aes(y=n, x=Service.disservice, fill=Service.disservice)) +
         axis.ticks.y = element_blank())
 
 
-##Fig4d_2----
+##Fig3e_2----
 
 # Services/disservices for each ecosystem function
 
-dat_Fig4d_2 <- dat %>% 
+dat_Fig3e_2 <- dat %>% 
   distinct(EF_specific, Paper.number, .keep_all = TRUE) %>%
   count(EF_group_broad,  Service.disservice) %>% # count entries
   mutate(EF_group_broad =fct_relevel(EF_group_broad, c("Multifunctionality",
@@ -393,12 +367,12 @@ dat_Fig4d_2 <- dat %>%
   add_count(EF_group_broad, wt=sum(n), name="sum") %>%
   mutate(perc=round(n*100/sum, digits=1))
 
-dat_Fig4d_2
+dat_Fig3e_2
 
 
 col2 <- c("darkolivegreen3", "yellow")
 
-ggplot(dat_Fig4d_2, aes(y=n, x=EF_group_broad, fill=Service.disservice)) + 
+ggplot(dat_Fig3e_2, aes(y=n, x=EF_group_broad, fill=Service.disservice)) + 
   geom_bar(position="stack", stat="identity", colour = "black")+
   scale_fill_manual(values=col2)+ 
   coord_flip() +
@@ -429,11 +403,11 @@ dat %>%
   mutate(perc_EF=round(EF_name*100/sum, digits=1))
 
 
-##Fig4e----
+##FigS2c----
 
 # EF dimensions: rates vs stocks vs fluxes
 
-dat_Fig4e <- dat %>% 
+dat_FigS2c <- dat %>% 
   distinct(EF_specific, Paper.number, .keep_all = TRUE) %>%  
   mutate(EF_dimens =fct_relevel(EF_dimens ,c("combined",
                                              "soil properties",
@@ -445,12 +419,12 @@ dat_Fig4e <- dat %>%
   add_count( wt = sum(n), name = "sum")%>%
   add_count( EF_dimens , wt = round(n*100/sum, digits=2), name = "perc") 
 
-dat_Fig4e
+dat_FigS2c
 
-dat_Fig4e %>% 
+dat_FigS2c %>% 
   summarise(sum(n))# n=117 EFs 
 
-ggplot(dat_Fig4e, aes(y=n, x=EF_dimens)) + 
+ggplot(dat_FigS2c, aes(y=n, x=EF_dimens)) + 
   geom_bar(position="stack", stat="identity", colour = "black", fill="grey")+
   coord_flip() +
   labs(y = "Investigated EFs", x =element_blank() ) +
@@ -466,22 +440,22 @@ ggplot(dat_Fig4e, aes(y=n, x=EF_dimens)) +
         axis.ticks.y = element_blank())
 
 
-##Fig4f----
+##FigS2d----
 
 # Investigated EFs across aboveground vs belowground compartments
 
-dat_Fig4f <- dat %>% 
+dat_FigS2d <- dat %>% 
   distinct(EF_specific, Paper.number, .keep_all = TRUE) %>% 
   mutate(AG_BG =fct_relevel(AG_BG ,c("AG, BG", "BG","AG"))) %>% 
   count(AG_BG)
    
-dat_Fig4f
+dat_FigS2d
 
-dat_Fig4f %>% 
+dat_FigS2d %>% 
   summarise(sum(n)) # n=117 EFs 
 
 
-ggplot(dat_Fig4f, aes(y=n, x=AG_BG)) + 
+ggplot(dat_FigS2d, aes(y=n, x=AG_BG)) + 
   geom_bar(position="stack", stat="identity", colour = "black", fill="grey")+
   coord_flip() +
   labs(y = "Investigated EFs", x =element_blank() ) +
@@ -497,9 +471,9 @@ ggplot(dat_Fig4f, aes(y=n, x=AG_BG)) +
         axis.ticks.y = element_blank())
 
 
-#Fig5----
+#Fig4----
 
-dat_Fig5 <- dat %>% 
+dat_Fig4 <- dat %>% 
   distinct(EF_specific, Taxon_spec, Div_level, Div_index_specific, Paper.number, .keep_all = TRUE) %>%
   mutate(Relationship_diversity=recode_factor(Relationship_diversity, .missing="No_BEF")) %>%
   mutate(Trophic.group_broad =fct_relevel(Trophic.group_broad ,c("plants", 
@@ -527,14 +501,14 @@ dat_Fig5 <- dat %>%
   mutate(perc_BEF_TL = BEF*100/BEF_sum) %>%  
   mutate(perc_No.BEF_TL = No_BEF*100/No_BEF_sum)
  
-dat_Fig5
+dat_Fig4
 
 
 
-##Fig5_1----
+##Fig4_1----
 # Bubble chart 
 # Number of cases when BEF relationships were not tested: 
-ggplot(dat_Fig5, aes(x = Trophic.group_broad, 
+ggplot(dat_Fig4, aes(x = Trophic.group_broad, 
                      y = EF_group_broad,
                      colour = Trophic.group_broad,
                      size = No_BEF)) +
@@ -557,10 +531,10 @@ ggplot(dat_Fig5, aes(x = Trophic.group_broad,
         axis.text.x=element_text(colour = "black", size=15))
 
 
-##Fig5_2----
+##Fig4_2----
 # Number of cases when BEF relationships were tested
 # for donut chart:
-ggplot(dat_Fig5%>%
+ggplot(dat_Fig4%>%
          mutate(BEF = (ifelse( BEF>0, BEF, NA))),
        aes(x = Trophic.group_broad, 
                      y = EF_group_broad,
@@ -581,20 +555,20 @@ ggplot(dat_Fig5%>%
 ## Ecosystem function is "EF_group_broad"
 ## Trophic level is "Trophic.group_broad"
 
-dat_Fig5_2 <- dat_Fig5%>%
+dat_Fig4_2 <- dat_Fig4%>%
   select(EF_group_broad, Trophic.group_broad, neutral, positive, negative) %>% 
   pivot_longer(!Trophic.group_broad & !EF_group_broad, names_to = "Relationship_diversity", values_to = "n")  
 
-dat_Fig5_2
+dat_Fig4_2
 
-dat_Fig5_2 <- dat_Fig5_2 %>% 
+dat_Fig4_2 <- dat_Fig4_2 %>% 
   mutate(hsize = 1) # hole size for donut chart
 
 colr <- c("firebrick1", "darkgray", "dodgerblue2") # colours for negative, neutral, and positive BEF relationships
 
 # Donut chart
 ### example for BEF among "plants" diversity and "Multifunctionality"
-ggplot(dat_Fig5_2 %>% 
+ggplot(dat_Fig4_2 %>% 
          filter(EF_group_broad=="Multifunctionality" & Trophic.group_broad=="plants"), # filter each EF per TL
        aes(x = hsize, y = n, fill = Relationship_diversity)) +
   geom_col() +
@@ -605,10 +579,10 @@ ggplot(dat_Fig5_2 %>%
         legend.position = "none",
     panel.background = element_blank())
 
-##Fig5_3----
+##Fig4_3----
 # Count total BEF for each EF
 
-dat_Fig5_3 <- dat %>% 
+dat_Fig4_3 <- dat %>% 
   mutate(Relationship_diversity=recode(Relationship_diversity, .missing = "No_BEF")) %>%
   distinct(EF_specific, Taxon_spec, Div_level, Div_index_specific, Paper.number, .keep_all = TRUE) %>%
   filter(!(Relationship_diversity == "No_BEF")) %>%
@@ -625,16 +599,16 @@ dat_Fig5_3 <- dat %>%
   mutate(EF_perc= round(n_EF*100/Total, digits=1))
   
 
-dat_Fig5_3
+dat_Fig4_3
 
-dat_Fig5_3 %>% 
+dat_Fig4_3 %>% 
   summarise(sum(n))  # number of BEF tested
 
 # Stacked barplots for BEF relationships for each function
 
 colr <- c("firebrick1", "darkgray", "dodgerblue2")
 
-ggplot(dat_Fig5_3, aes(fill =Relationship_diversity, y=n, x=EF_group_broad)) + 
+ggplot(dat_Fig4_3, aes(fill =Relationship_diversity, y=n, x=EF_group_broad)) + 
   geom_bar(position="fill", stat="identity")+
   scale_fill_manual(values=colr)+ 
   coord_flip() +
@@ -654,10 +628,10 @@ ggplot(dat_Fig5_3, aes(fill =Relationship_diversity, y=n, x=EF_group_broad)) +
   scale_y_continuous(expand = c(0, 0.1))
 
 
-##Fig5_4----
+##Fig4_4----
 # Count total BEF for each trophic level
 
-dat_Fig5_4 <- dat %>% 
+dat_Fig4_4 <- dat %>% 
   mutate(Relationship_diversity=recode_factor(Relationship_diversity, .missing = "No_BEF")) %>%
   distinct(EF_specific, Taxon_spec, Div_level, Div_index_specific, Paper.number, .keep_all = TRUE) %>%
   filter(!(Relationship_diversity == "No_BEF")) %>%
@@ -673,16 +647,16 @@ dat_Fig5_4 <- dat %>%
   mutate(perc.TL= round(n_BEF*100/n_BEF_Total, digits=1)) 
   
 
-dat_Fig5_4
+dat_Fig4_4
 
-dat_Fig5_4 %>% 
+dat_Fig4_4 %>% 
   summarise(sum(n))
 
 # Stacked barplots for BEF relationships for each trophic level
 
 colr <- c("firebrick1", "darkgray", "dodgerblue2")
 
-ggplot(dat_Fig5_4, aes(fill =Relationship_diversity, y=n, x=Trophic.group_broad)) + 
+ggplot(dat_Fig4_4, aes(fill =Relationship_diversity, y=n, x=Trophic.group_broad)) + 
   geom_bar(position="fill", stat="identity")+
   scale_fill_manual(values=colr)+ 
   coord_flip() +
@@ -701,16 +675,16 @@ ggplot(dat_Fig5_4, aes(fill =Relationship_diversity, y=n, x=Trophic.group_broad)
 
 
 
-#Fig6----
+#Fig5----
 
-##Fig6a----
+##Fig5a----
 # How often was biodiversity manipulation direct?
 
 dat$Dir.indir_biodiversity
 dat$Indirect_specific
 
 
-dat_Fig6_a <- dat %>% 
+dat_Fig5a <- dat %>% 
   distinct(EF_specific, Taxon_spec, Div_level, Div_index_specific, Paper.number, .keep_all = TRUE) %>%
   mutate(Indirect_specific =fct_relevel(Indirect_specific, c("via land use",
                                                          "via habitat",
@@ -723,12 +697,12 @@ dat_Fig6_a <- dat %>%
 
 
 
-dat_Fig6_a
+dat_Fig5a
    
-dat_Fig6_a %>% 
+dat_Fig5a %>% 
   summarise(sum(n))
 
-ggplot(dat_Fig6_a, aes(fill=Relationship_diversity, y=n, x=Indirect_specific)) + 
+ggplot(dat_Fig5a, aes(fill=Relationship_diversity, y=n, x=Indirect_specific)) + 
   geom_bar(position="fill", stat="identity")+
   scale_fill_manual(values=colr)+ 
   coord_flip() +
@@ -764,11 +738,11 @@ dat %>%
   add_count ( Indirect_specific, wt=sum(n), name="sum") %>%
   mutate (perc=round(n*100/sum, digits=1))
 
-##Fig6b----
+##Fig5b----
 # BEF for each experiment type
 
 
-dat_Fig6_b <- dat %>% 
+dat_Fig5b <- dat %>% 
   distinct(EF_specific, Taxon_spec, Div_level, Div_index_specific, Paper.number, .keep_all = TRUE) %>%
   mutate(Experiment_type =fct_relevel(Experiment_type, c("simulation model",
                                                          "microcosm/mesocosm experiment",
@@ -780,12 +754,12 @@ dat_Fig6_b <- dat %>%
   add_count (Experiment_type, wt=sum(n), name="sum") %>%
   mutate (perc=round(n*100/sum, digits=1))
 
-dat_Fig6_b
+dat_Fig5b
 
 dat_Fig6_b %>% 
   summarise(sum(n))
 
-ggplot(dat_Fig6_b, aes(fill=Relationship_diversity, y=n, x=Experiment_type)) + 
+ggplot(dat_Fig5b, aes(fill=Relationship_diversity, y=n, x=Experiment_type)) + 
   geom_bar(position="fill", stat="identity")+
   scale_fill_manual(values=colr)+ 
   coord_flip() +
@@ -820,10 +794,10 @@ dat %>%
 
 
 
-##Fig6c----
+##Fig5c----
 # BEF for each dimension of ecosystem functioning (i.e., fluxes vs rates vs stocks)
 
-dat_Fig6_c <- dat %>% 
+dat_Fig5c <- dat %>% 
   distinct(EF_specific, Taxon_spec, Div_level, Div_index_specific, Paper.number, .keep_all = TRUE) %>%
   mutate(EF_dimens =fct_relevel(EF_dimens ,c("combined",
                                              "soil properties",
@@ -838,14 +812,14 @@ dat_Fig6_c <- dat %>%
 
 
 
-dat_Fig6_c
+dat_Fig5c
 
-dat_Fig6_c %>% 
+dat_Fig5c %>% 
   summarise(sum(n))
 
 colr <- c("firebrick1", "darkgray", "dodgerblue2")
 
-ggplot(dat_Fig6_c, aes(fill=Relationship_diversity, y=n, x=EF_dimens)) + 
+ggplot(dat_Fig5c, aes(fill=Relationship_diversity, y=n, x=EF_dimens)) + 
   geom_bar(position="fill", stat="identity")+
   scale_fill_manual(values=colr)+ 
   coord_flip() +
@@ -866,10 +840,10 @@ ggplot(dat_Fig6_c, aes(fill=Relationship_diversity, y=n, x=EF_dimens)) +
 
 
 
-##Fig6d----
+##Fig5d----
 # BEF for services vs disservices
 
-dat_Fig6_d <- dat %>% 
+dat_Fig5d <- dat %>% 
   distinct(EF_specific, Taxon_spec, Div_level, Div_index_specific, Paper.number, .keep_all = TRUE) %>%
   mutate(Service.disservice =fct_relevel(Service.disservice, c("disservice","service"))) %>%
   count(Service.disservice,Relationship_diversity) %>% # count entries
@@ -877,14 +851,14 @@ dat_Fig6_d <- dat %>%
   add_count(Service.disservice, wt=sum(n), name="sum") %>%
   mutate(perc=round(n*100/sum, digits=1))
 
-dat_Fig6_d
+dat_Fig5d
 
-dat_Fig6_d %>% 
+dat_Fig5d %>% 
   summarise(sum(n))
 
 colr <- c("firebrick1", "darkgray", "dodgerblue2")
 
-ggplot(dat_Fig6_d, aes(fill=Relationship_diversity, y=n, x=Service.disservice)) + 
+ggplot(dat_Fig5d, aes(fill=Relationship_diversity, y=n, x=Service.disservice)) + 
   geom_bar(position="fill", stat="identity")+
   scale_fill_manual(values=colr)+ 
   coord_flip() +
@@ -904,17 +878,17 @@ ggplot(dat_Fig6_d, aes(fill=Relationship_diversity, y=n, x=Service.disservice)) 
   scale_y_continuous(expand = c(0, 0.1))
 
 
-# Fig.7----
+# Fig.6----
 
 # Effects of treatment (broad types) on biodiversity and ecosystem functions
 
 
-##Fig7.1---- 
+##Fig6.1---- 
 # Effects of treatment (broad types) on biodiversity
 # The proportion of positive, neutral, and negative effects of land use intensity, disturbance, 
 # habitat complexity and restoration as drivers of biodiversity (Fig.7 left panel). 
 
-dat_Fig7.1 <- dat %>% 
+dat_Fig6.1 <- dat %>% 
   distinct(Taxon_spec, Div_level, Div_index_specific, Paper.number, .keep_all = TRUE) %>%
   mutate(Trtmnt=fct_recode(Treatment_broad, "Habitat complexity"="Habitat complexity (as covariate)" )) %>%
   count(Trtmnt, Relationship_management_diversity) %>% 
@@ -928,16 +902,16 @@ dat_Fig7.1 <- dat %>%
                                         "Land use intensity")))
 
 
-dat_Fig7.1
+dat_Fig6.1
 
-dat_Fig7.1 %>% 
+dat_Fig6.1 %>% 
   summarise(sum(n))
 
 # Stacked barplots, percent cases
 
 colr <- c("firebrick1", "darkgray", "dodgerblue2")
 
-ggplot(dat_Fig7.1, aes(fill =Relationship_management_diversity, y=n, x=Trtmnt)) + 
+ggplot(dat_Fig6.1, aes(fill =Relationship_management_diversity, y=n, x=Trtmnt)) + 
   geom_bar(position="fill", stat="identity")+
   scale_fill_manual(values=colr)+ 
   coord_flip() +
@@ -954,14 +928,14 @@ ggplot(dat_Fig7.1, aes(fill =Relationship_management_diversity, y=n, x=Trtmnt)) 
   geom_text(aes(label=n_Trtmnt,y=n_Trtmnt),y=1.05, size=5)+ 
   scale_y_continuous(expand = c(0, 0.1))
 
-##Fig7.2----
+##Fig6.2----
 
 # barplots for each trophic level and management type
 
 dat %>% 
   distinct(Trophic.group_broad)
 
-dat_Fig7.2 <- dat %>% 
+dat_Fig6.2 <- dat %>% 
   mutate(Trtmnt=fct_recode(Treatment_broad, "Habitat complexity" = "Habitat complexity (as covariate)" )) %>%
   distinct(Taxon_spec, Div_level, Div_index_specific, Paper.number, .keep_all = TRUE) %>%
   count(Trtmnt, Trophic.group_broad) %>% # count entries
@@ -977,12 +951,12 @@ dat_Fig7.2 <- dat %>%
                                                                  "consumers", 
                                                                  "whole-food-web")))
 
-dat_Fig7.2
+dat_Fig6.2
 
 col <- c("seagreen3","magenta", "mediumvioletred", "orange",  "skyblue" )
 
 # Land use intensity
-p1 <- ggplot(dat_Fig7.2%>%
+p1 <- ggplot(dat_Fig6.2%>%
                filter(Trtmnt == "Land use intensity"),
              aes(x="", y=n, fill=Trophic.group_broad))  +
   scale_fill_manual(values=col)+
@@ -997,7 +971,7 @@ p1 <- ggplot(dat_Fig7.2%>%
         legend.position="none") 
 
 # Disturbance
-p2 <- ggplot(dat_Fig7.2%>%
+p2 <- ggplot(dat_Fig6.2%>%
                filter(Trtmnt == "Disturbance"),
              aes(x="", y=n, fill=Trophic.group_broad))  +
   scale_fill_manual(values=c("mediumvioletred", "orange",  "skyblue"))+
@@ -1013,7 +987,7 @@ p2 <- ggplot(dat_Fig7.2%>%
 
 
 # Habitat complexity
-p3 <- ggplot(dat_Fig7.2%>%
+p3 <- ggplot(dat_Fig6.2%>%
                filter(Trtmnt == "Habitat complexity"),
              aes(x="", y=n, fill=Trophic.group_broad))  +
   scale_fill_manual(values=c("seagreen3","magenta", "mediumvioletred", "orange",  "skyblue"))+
@@ -1028,7 +1002,7 @@ p3 <- ggplot(dat_Fig7.2%>%
         legend.position="none") 
 
 # Restoration
-p4 <- ggplot(dat_Fig7.2%>%
+p4 <- ggplot(dat_Fig6.2%>%
                filter(Trtmnt == "Restoration"),
              aes(x="", y=n, fill=Trophic.group_broad))  +
   scale_fill_manual(values=c("seagreen3", "orange",  "skyblue"))+
@@ -1046,12 +1020,12 @@ p1+p2+p3+p4+plot_layout(ncol=1)
 
 
 
-##Fig7.3----
+##Fig6.3----
 # Effects of treatment (broad types) on EFs
 # The proportion of positive, neutral, and negative effects of land use intensity, disturbance, 
 # habitat complexity and restoration as drivers of ecosystem functions (Fig.7 right panel). 
 
-dat_Fig7.3 <- dat %>% 
+dat_Fig6.3 <- dat %>% 
   distinct(Focus_broad, EF_specific, Paper.number, .keep_all = TRUE) %>% # create a row for each unique paper and variable (e.g. treatment)
   mutate(Trtmnt=fct_recode(Treatment_broad, "Habitat complexity"="Habitat complexity (as covariate)")) %>%
   count(Trtmnt, Relationship_management_function) %>% 
@@ -1062,15 +1036,15 @@ dat_Fig7.3 <- dat %>%
                                        "Restoration",
                                        "Habitat complexity",
                                        "Land use intensity")))
-dat_Fig7.3
+dat_Fig6.3
 
-dat_Fig7.3 %>% 
+dat_Fig6.3 %>% 
   summarise(sum(n))
 
 
 colr <- c("firebrick1", "darkgray", "dodgerblue2")
 
-ggplot(dat_Fig7.3, aes(fill=Relationship_management_function, y=n, x=Trtmnt)) + 
+ggplot(dat_Fig6.3, aes(fill=Relationship_management_function, y=n, x=Trtmnt)) + 
   geom_bar(position="fill", stat="identity")+
   scale_fill_manual(values=colr)+ 
   coord_flip() +
@@ -1086,10 +1060,10 @@ ggplot(dat_Fig7.3, aes(fill=Relationship_management_function, y=n, x=Trtmnt)) +
   scale_y_continuous(expand = c(0, 0.1))
 
 
-##Fig7.4---- 
+##Fig6.4---- 
 # pie charts: services/disservices
 
-dat_Fig7.4 <- dat %>% 
+dat_Fig6.4 <- dat %>% 
   distinct(Focus_broad, EF_specific, Paper.number, .keep_all = TRUE) %>% 
   mutate(Trtmnt=fct_recode(Treatment_broad,  "Habitat complexity"="Habitat complexity (as covariate)" )) %>%
   count(Trtmnt, Service.disservice) %>% 
@@ -1100,11 +1074,11 @@ dat_Fig7.4 <- dat %>%
                                        "Restoration",
                                        "Habitat complexity",
                                        "Land use intensity")))
-dat_Fig7.4
+dat_Fig6.4
 
 
 # Land use intensity
-p5 <- ggplot(dat_Fig7.4%>%
+p5 <- ggplot(dat_Fig6.4%>%
                filter(Trtmnt == "Land use intensity"),
              aes(x="", y=n, fill=Service.disservice))  +
   scale_fill_manual(values=c("yellow","darkolivegreen3"))+
@@ -1119,7 +1093,7 @@ p5 <- ggplot(dat_Fig7.4%>%
         legend.position="none") 
 
 # Disturbance
-p6<-ggplot(dat_Fig7.4%>%
+p6<-ggplot(dat_Fig6.4%>%
              filter(Trtmnt == "Disturbance"),
            aes(x="", y=n, fill=Service.disservice))  +
   scale_fill_manual(values=c("darkolivegreen3"))+
@@ -1134,7 +1108,7 @@ p6<-ggplot(dat_Fig7.4%>%
         legend.position="none")
 
 # Habitat complexity
-p7<-ggplot(dat_Fig7.4%>%
+p7<-ggplot(dat_Fig6.4%>%
              filter(Trtmnt == "Habitat complexity"),
            aes(x="", y=n, fill=Service.disservice))  +
   scale_fill_manual(values=c("yellow","darkolivegreen3"))+
@@ -1149,7 +1123,7 @@ p7<-ggplot(dat_Fig7.4%>%
         legend.position="none")
 
 # Restoration
-p8<-ggplot(dat_Fig7.4%>%
+p8<-ggplot(dat_Fig6.4%>%
              filter(Trtmnt == "Restoration"),
            aes(x="", y=n, fill=Service.disservice))  +
   scale_fill_manual(values=c("darkolivegreen3"))+
@@ -1167,13 +1141,13 @@ p8<-ggplot(dat_Fig7.4%>%
 p5+p6+p7+p8+plot_layout(ncol = 1)
 
 
-#Fig8----
+#Fig7----
 # Specific treatment effects on biodiversity and ecosystem functions
 
-## Fig8.1----
+## Fig7.1----
 # Specific treatment effects on biodiversity
 
-dat_Fig8.1 <- dat %>% 
+dat_Fig7.1 <- dat %>% 
   mutate(Trtmnt=fct_recode(Treatment_broad, "Habitat complexity"="Habitat complexity (as covariate)")) %>%
   unite("z", Taxon_spec:Div_index, Focus_broad, remove = FALSE)%>% 
   distinct(z, Paper.number, .keep_all = TRUE) %>% 
@@ -1189,14 +1163,14 @@ dat_Fig8.1 <- dat %>%
                                                  "Pesticides", "Fertilization",
                                                  "Woody encroachment ", "Grazing abandonment ", "Grazing", "Mowing",
                                                  "Pollinator hives absence", "Cover crop effects" , "Natural/croplands")))
-dat_Fig8.1
+dat_Fig7.1
 
 # Stacked barplots, percent of cases
 
 colr <- c("firebrick1", "darkgray", "dodgerblue2")
 
 # Land use intensity
-p8.1.1 <- ggplot(dat_Fig8.1%>%
+p7.1.1 <- ggplot(dat_Fig7.1%>%
                    filter(Trtmnt == "Land use intensity"),
                  aes(fill=Relationship_management_diversity, y=n, x=Focus_broad)) + 
   geom_bar(position="fill", stat="identity")+
@@ -1217,7 +1191,7 @@ p8.1.1 <- ggplot(dat_Fig8.1%>%
 
 
 # "Habitat complexity"
-p8.1.2 <- ggplot(dat_Fig8.1%>%
+p7.1.2 <- ggplot(dat_Fig7.1%>%
                    filter(Trtmnt ==  "Habitat complexity"),
                  aes(fill=Relationship_management_diversity, y=n, x=Focus_broad)) + 
   geom_bar(position="fill", stat="identity")+
@@ -1236,16 +1210,16 @@ p8.1.2 <- ggplot(dat_Fig8.1%>%
   geom_text(aes(label=n_Trtmnt,y=n_Trtmnt), y=1.05, size=6)+ 
   scale_y_continuous(expand = c(0, 0.1))
 
-p8.1.1 + p8.1.2 + plot_layout(ncol=1)
+p7.1.1 + p7.1.2 + plot_layout(ncol=1)
 
 
-## Fig8.2----
+## Fig7.2----
 # Specific treatment effects on EFs
 
 dat %>% 
   distinct(Focus_broad)
 
-dat_Fig8.2 <- dat %>% 
+dat_Fig7.2 <- dat %>% 
   mutate(Trtmnt=fct_recode(Treatment_broad, "Habitat complexity"  = "Habitat complexity (as covariate)")) %>%
   distinct(Trtmnt, Focus_broad, EF_specific, Paper.number, .keep_all = TRUE) %>% 
   count(Trtmnt,Focus_broad, Relationship_management_function) %>% 
@@ -1260,7 +1234,7 @@ dat_Fig8.2 <- dat %>%
                                                  "Woody encroachment ", "Grazing abandonment ", "Grazing", "Mowing",
                                                  "Pollinator hives absence", "Cover crop effects" , "Natural/croplands"
   )))
-dat_Fig8.2
+dat_Fig7.2
 
 
 # Stacked barplots, percent of cases
@@ -1268,7 +1242,7 @@ dat_Fig8.2
 colr <- c("firebrick1", "darkgray", "dodgerblue2")
 
 # Land use intensity
-p8.2.1 <- ggplot(dat_Fig8.2%>%
+p7.2.1 <- ggplot(dat_Fig7.2%>%
                    filter(Trtmnt == "Land use intensity"),
                  aes(fill=Relationship_management_function, y=n, x=Focus_broad)) + 
   geom_bar(position="fill", stat="identity")+
@@ -1293,7 +1267,7 @@ p8.2.1 <- ggplot(dat_Fig8.2%>%
 
 
 # "Habitat complexity"
-p8.2.2 <-ggplot(dat_Fig8.2%>%
+p7.2.2 <-ggplot(dat_Fig7.2%>%
                   filter(Trtmnt == "Habitat complexity"),
                 aes(fill=Relationship_management_function, y=n, x=Focus_broad)) + 
   geom_bar(position="fill", stat="identity")+
@@ -1317,11 +1291,11 @@ p8.2.2 <-ggplot(dat_Fig8.2%>%
   scale_y_continuous(expand = c(0, 0.1))
 
 
-p8.2.1+p8.2.2+plot_layout(ncol=1)
+p7.2.1+p7.2.2+plot_layout(ncol=1)
 
 
 
-# Supplementary Materials -----
+  # Supplementary Materials -----
 
 ##Table S2 -----
 # Information on the groupings of the drivers of biodiversity and ecosystem functions.
@@ -1415,7 +1389,7 @@ write.csv(dat_S6, file = "S6.csv")
 ## Table S8  ----
 # "BEF_context.depend_broad", "BEF_context.depend_spec"
 
-dat_figS2 <- dat %>% 
+dat_figS4 <- dat %>% 
   distinct(EF_specific, Taxon_spec, Div_level, Div_index_specific, Paper.number, .keep_all = TRUE) %>%
   mutate(Relationship_diversity=recode(Relationship_diversity, .missing = "No_BEF")) %>%
   filter(!(Relationship_diversity =="No_BEF"))%>%
@@ -1432,17 +1406,17 @@ dat_figS2 <- dat %>%
   add_count(BEF_context.depend_broad, wt=sum(n), name="sum")%>%
   mutate(perc=(round(sum*100/BEF_sum, digits=1)))
 
-dat_figS2
+dat_figS4
 
 
 # How many out of 140 BEF studies reported context dependency?
-dat_figS2 %>% 
+dat_figS4 %>% 
   summarise(sum(n))
 
-write.csv(dat_figS2, "S8.csv")
+write.csv(dat_figS4, "S8.csv")
 
 ## FigS4----
-ggplot(dat_figS2%>%
+ggplot(dat_figS4%>%
          filter(!(BEF_context.depend_broad=="No"))%>%
          count(BEF_context.depend_broad), 
        aes(y=n, x=BEF_context.depend_broad)) + 
@@ -1464,6 +1438,39 @@ ggplot(dat_figS2%>%
         axis.line = element_line(colour = "black"),
         axis.ticks =  element_line(colour = "black"),
         axis.ticks.y = element_blank())
+
+##FigS1----
+# Number and % of publications per ecosystem type
+
+dat_FigS1 <- dat %>% 
+  distinct(Paper.number, .keep_all = TRUE) %>% 
+  mutate(Experiment_type =fct_relevel(Experiment_type ,c( "simulation model",
+                                                "microcosm/mesocosm experiment",
+                                                "manipulative field experiment",
+                                                "field observation"))) %>%
+  count(Experiment_type) %>% 
+  add_count( wt = sum(n), name = "sum") %>% 
+  add_count( Experiment_type, wt = round(n*100/sum, digits = 2), name = "perc") 
+
+dat_FigS1
+
+# Figure S1
+ggplot(dat_FigS1, aes(y=n, x=Experiment_type)) + 
+  geom_bar(position="stack", stat="identity", colour = "black", fill="grey")+
+  coord_flip() +
+  labs(y = "Number of studies", x =element_blank() ) +
+  theme(axis.text.y=element_text(colour = "black", size=15),
+        axis.text.x=element_text(colour = "black", size=13),
+        axis.title=element_text(size=15),
+        legend.text=element_text(size=10),
+        legend.title=element_text(size=12) ,
+        legend.position = "none",
+        panel.background = element_blank(),
+        axis.line = element_line(colour = "black"),
+        axis.ticks =  element_line(colour = "black"),
+        axis.ticks.y = element_blank())
+
+
 
 # Multifunctionality----
 
