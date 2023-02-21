@@ -1612,9 +1612,9 @@ dat_figS4 %>%
 
 ## FigS4----
 ggplot(dat_figS4%>%
-         filter(!(BEF_context.depend_broad=="No"))%>%
-         count(BEF_context.depend_broad), 
-       aes(y=n, x=BEF_context.depend_broad)) + 
+         group_by(BEF_context.depend_broad) %>% 
+         summarise(sum=sum(n)), 
+       aes(y=sum, x=BEF_context.depend_broad)) + 
   geom_bar(position="stack", stat="identity", colour = "black", fill="grey")+
   coord_flip() +
   labs(y = "BEF relationships", x =element_blank() ) +
