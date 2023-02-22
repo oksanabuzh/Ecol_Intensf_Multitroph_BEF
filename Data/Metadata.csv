@@ -1,0 +1,85 @@
+"Metadata for the dataset ""Data_Ecol_Intensf_Multitroph_BEF""",
+in,
+Oksana Buzhdygan & Jana S. Petermann,
+Multitrophic aspects of ecological intensification and multiple ecosystem functions and services,
+Journal of Plant Ecology,
+Special issue “Ecological intensification of agriculture and forestry through biodiversity management”,
+,
+,
+Variable name,Interpretation
+Study info:,
+Article Title,Title of article
+Authors,Author of study
+Journal,Journal in which the study was published
+Keywords,Keywords
+Abstract,Abstract
+Publication Year,Publication year of study
+DOI Link,DOI Link
+Paper number,Identification number of publication across this database
+Read by,Who read and assessed the paper
+Overlapping papers,"List of other papers, not considered in this review, because there analyses were based on data highly overlapping with the focal study."
+Relevant,Yes/no on whether to include the study
+Not_relevant_reason,"Reason if ""no"" under ""Relevant"""
+Experiment_type,"Type of study (microcosm, field plots, landscape level)"
+Management/Treatment_specific,"Detailed description of agromanagement  applied (e.g., mowing, aquaculture, crop production…) / or main treatment if management variations are absent (e.g., habitat complexity). If treatment is diversity manipulation - it is stated but relations are shown below (in biodiversity columns).         "
+Treatment_broad,"Broad groups of  ""Management/Treatment_specific"""
+Focus_broad,"More detailed classifications of the groups in ""Treatment_broad"""
+Focus_specific,"More detailed classifications of the groups in ""Focus_broad"". It is NA if ""Treatment_broad"" is ""Habitat complexity (as covariate)"""
+Focus_details,"More detailed classifications on  ""Focus_specific"". It is NA if ""Treatment_broad"" is ""Habitat complexity (as covariate)"""
+BEF_focus,"Biodiversity focus: ""BEF"" - if the focus of the study was BEF relationships; ""Biodiversity (as management tool)"" - if biodiversity manipulations were used as the management tool of the study agroecosystem; ""NA"" - if other."
+Ecosystem functions:,
+EF_group_broad,"Broad category of ecosystem function studied (e.g., biomass, nutrient mineralisation, soil carbon storage, biomass stability, pest controll, weed controll, pollination, multifunctionality, multitrophic network)"
+EF_group_specific,"More detailed classifications of the categories in ""EF_group_broad"""
+EF_specific,"Specific description of ecosystem function studied (e.g., frut seed mass or flower visits for 'Pollination' as general category above)"
+EF_details,"Additional details to the description in ""EF_specific"""
+Ecosystem function_measurement,Description on how ecosystem function was measured
+Service/disservice,Study function is service or disservice
+EF_dimens,"Dimension of ecosystem function, i.e. is measured as rate, flux or stock"
+EF_dimens_specific,"More detailed description of ""EF_dimens"""
+Trophic level_function,"At what trophic level is the function studied: 1st trophic level (plants); 2nd (e.g. pollination, herbivory); 3d (predation); 4(intraquild predation); multiple levels; and whole-network level"
+AG_BG,Information on whether the investigated ecosystem functions were measured above ground or below ground
+Strata_EF,Information on the strata where ecosystem functions were measured
+Relationship_management_function,"Sign (positive, neutral or negative) of relationship between ecosystem function and management"
+context dependency_management_function,remark on any existing tests on the context dependency of management effects
+Biodiversity:,
+Biodiversity manipulation_broad,Was the biodiversity manipulated? (Yes/NO)
+Biodiversity manipulation_specific,"Description of biodiversity tratments applied (e.g. inercropping, addition of natural enemies)"
+Dir/indir_biodiversity,"Biodiversity change is direct or indirect? Direct: add organisms/seeds, indirect: improve habitat"
+Indirect_specific,"Mediator of indirect biodiversity change if ""dir/indir_biod"" is indirect"
+Trophic level_biodiversity,"Trophic level of organisms whose biodiversity was related to the given ecosystem function (1st (plants); 2nd (herbivores, pollinators); 3(predators); 4 (superpredators); multiple levels; whole-food-web)"
+Trophic group,"Trophic group of organisms whose biodiversity was related to the given ecosystem function (primary produsers, herbivores, parasites, detritivores, predators, consumers (if multiple consumer groups), wholele-food-weeb)"
+Functional group,"Functional group of organisms whose biodiversity was related to the given ecosystem function (plants, pollinators, predators... )"
+Taxon_broad,Broad category of taxonomic group of which biodiversity effects were studied (e.g. invertibrates)
+Taxon_spec,"More specific category of taxonomic group of which biodiversity effects were studied (e.g. arthropods for invertibrate category in ""Taxon_broad"")"
+Taxon_details,Specific information of taxonomic group of which biodiversity effects were studied (e.g. bees)
+Div_level,"Biodiversity facet (e.g.  taxonomic diversity, functional diversity, phylogenetic diversity, food-web diversity indices)"
+Div_index,"Broad category of biodiversity indicator (e.g.  richness, information indices, beta diversity, distance-based indices, network complexity measures)"
+Div_index_specific,"Specific biodiversity indicator (e.g. species richness, Shannon diversity, mean phylogenetic distance)"
+Relationship_diversity,"Sign (positive, neutral or negative) of relationship between ecosystem function and specific biodiversity indicator"
+Relationship assessment,"Statistical approach to assign the direction of a relationship, e.g. based on significance testing (P-value based) or parsimony (e.g. AIC based)"
+Source result,"Reference to figure or table in article, in which BEF relationship was statistically reported"
+Relationship_management_diversity,"Sign (positive, neutral or negative) of relationship between biodiversity and management"
+Context dependency_management_diversity,Remark on any existing tests on the context dependency of management effects
+Covariates:,
+Climate change,"Yes/No, on whether extreme climate factors were included in the statistical tests"
+Climate change_specific,"Description of climate-change drivers considered (draught, fires, floods)"
+Climate_response,"Response variable of climate change (function, biodiversity)"
+Relationship_climate,"Sign (positive, neutral or negative) of relationship between ecosystem function (or biodiversity) and climate change factor"
+Habitat,"Yes/No, on whether habitat maintainance/creation was compared to direct consumer augmentation."
+Habitat_response,"Response variable of habitat maintainance/creation (function, biodiversity)"
+Relationship_habitat,"Sign (positive, neutral or negative) of relationship between ecosystem function (or biodiversity) and habitat maintainance/creation"
+Other covariate,"Yes/no, on whether other covariates were included in the statistical tests"
+Which other covariate,list of included other covariates
+BEF_context depend_broad,Broad categories of the detected (if any) context dependency of the BEF relationsip
+BEF_context depend_spec,"Specific groups of categories in ""BEF_context depend_broad"""
+Context dependency BEF_explanations,Details on the detected (if any) context dependency of the BEF relationsip
+System type:,
+Ecosystem_type_broad,"Broad ecosystem type category (e.g. crop, grasslands, tropical or temperate forests, aquatic system)"
+Ecosystem_type_specific,"More specific ecosystem type category (e.g. tropical oil plantations, temporal fen grasslans)"
+Continent,Continent at which study was performed
+Country_broad,Country in which study was performed
+Country_details,Details on country where the study was performed
+GPS_N,"GPS coordinates North, i.e. latitude (in decimals) of study site"
+GPS_E,"GPS coordinates East, i.e. longitude (in decimals) of study site"
+Other:,
+Comment,Comments
