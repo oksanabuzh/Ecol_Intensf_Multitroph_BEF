@@ -1,7 +1,7 @@
 # Code for summary statistics and visualization of results
-# for Buzhdygan & Petermann
+# Buzhdygan & Petermann
 # "Multitrophic aspects of ecological intensification and multiple ecosystem functions and services"
-# in Journal of Plant Ecology
+# Journal of Plant Ecology
 
 # Required packages
 
