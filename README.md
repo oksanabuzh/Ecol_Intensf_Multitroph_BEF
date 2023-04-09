@@ -1,10 +1,10 @@
 # Ecol_Intensf_Multitroph_BEF
 
-Code and data for the quantitative analysis in 
+Code and data for systematic literature review in 
 	
 Oksana Buzhdygan & Jana S. Petermann	
 
-Title "Multitrophic aspects of ecological intensification and multiple ecosystem functions and services"
+Title "Multitrophic biodiversity enhances ecosystem functions, services, and ecological intensification in agriculture"
 
 submitted to Journal of Plant Ecology
 

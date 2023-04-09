@@ -1,6 +1,9 @@
-# Code forthe  summary statistics and visualization of results
+# Code for the  summary statistics and visualization of results
+
 # Buzhdygan & Petermann
-# "Multitrophic aspects of ecological intensification and multiple ecosystem functions and services"
+
+# "Multitrophic biodiversity enhances ecosystem functions, services, and ecological intensification in agriculture"
+
 # Journal of Plant Ecology
 
 # Required packages
