@@ -1,6 +1,6 @@
-# Ecol_Intensf_Multitroph_BEF
+# Code for Buzhdygan & Petermann (2023) Journal of Plant Ecology
 
-Code and data for the systematic literature review in 
+Code to reproduce the results for the systematic literature review in 
 	
  Oksana Buzhdygan & Jana S. Petermann	
 
@@ -11,6 +11,8 @@ Journal of Plant Ecology (accepted 2023)
 
  special issue “Ecological intensification of agriculture and forestry through biodiversity management”
 
+Data source: 
+Data to run this code and to support the conclusions of this study are pablished as Supplementary Data to this paper
 
-
-the final repository will be submitted into a repository with a doi link
+Citation:
+Buzhdygan & Petermann (2023). Multitrophic biodiversity enhances ecosystem functions, services, and ecological intensification in agriculture. Journal of Plant Ecology.
