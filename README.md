@@ -16,3 +16,5 @@ Data to run this code and to support the conclusions of this study are pablished
 
 Citation:
 Buzhdygan & Petermann (2023). Multitrophic biodiversity enhances ecosystem functions, services, and ecological intensification in agriculture. [Journal of Plant Ecology](https://academic.oup.com/jpe).
+
+![ ](Cover_16_6.jpg)
