@@ -2,19 +2,10 @@
 
 Code to reproduce the results for the systematic literature review in 
 	
- Oksana Buzhdygan & Jana S. Petermann	
+Oksana Y Buzhdygan, Jana S Petermann, Multitrophic biodiversity enhances ecosystem functions, services and ecological intensification in agriculture, Journal of Plant Ecology, Volume 16, Issue 6, December 2023, rtad019, https://doi.org/10.1093/jpe/rtad019  
 
- Title "Multitrophic biodiversity enhances ecosystem functions, services, and ecological intensification in agriculture"
-
-Journal of Plant Ecology (accepted 2023)
-
-
- special issue “Ecological intensification of agriculture and forestry through biodiversity management”
 
 Data source: 
-Data to run this code and to support the conclusions of this study are pablished as Supplementary Data to this paper
-
-Citation:
-Buzhdygan & Petermann (2023). Multitrophic biodiversity enhances ecosystem functions, services, and ecological intensification in agriculture. [Journal of Plant Ecology](https://academic.oup.com/jpe).
+Data to run this code and to support the conclusions of this study are published as Supplementary Data to this paper [Journal of Plant Ecology](https://academic.oup.com/jpe/article/16/6/rtad019/7177879)
 
 ![ ](Cover_16_6.jpg)
