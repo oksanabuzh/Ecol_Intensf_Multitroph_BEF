@@ -1,6 +1,6 @@
 # Code for Buzhdygan & Petermann (2023) Journal of Plant Ecology
 
-[![DOI](https://zenodo.org/badge/601563601.svg)](https://zenodo.org/doi/10.5281/zenodo.12770276)
+Cite the code: [![DOI](https://zenodo.org/badge/601563601.svg)](https://zenodo.org/doi/10.5281/zenodo.12770276)
 
 Code to reproduce the results for the systematic literature review in 
 	
