@@ -1,5 +1,7 @@
 # Code for Buzhdygan & Petermann (2023) Journal of Plant Ecology
 
+[![DOI](https://zenodo.org/badge/601563601.svg)](https://zenodo.org/doi/10.5281/zenodo.12770276)
+
 Code to reproduce the results for the systematic literature review in 
 	
 Oksana Y Buzhdygan, Jana S Petermann, Multitrophic biodiversity enhances ecosystem functions, services and ecological intensification in agriculture, Journal of Plant Ecology, Volume 16, Issue 6, December 2023, rtad019, https://doi.org/10.1093/jpe/rtad019  
